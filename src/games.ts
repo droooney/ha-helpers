@@ -11,6 +11,7 @@ import {
 import { z } from "zod";
 import sortBy from "lodash/sortBy.js";
 import { exec } from "teen_process";
+import { logError } from "./log.js";
 
 export type Game = {
   name: string;
@@ -25,15 +26,19 @@ export const STEAM_APPS_ROOT = path.resolve(STEAM_ROOT, "steamapps");
 export const STEAM_USER_DATA_ROOT = path.resolve(STEAM_ROOT, "userdata");
 
 export async function turnOnGameMode(): Promise<void> {
-  await Promise.all([
-    exec("nircmd", ["closeprocess", "chrome"]),
-    exec("nircmd", ["closeprocess", "webstorm64"]),
-  ]);
+  try {
+    await Promise.all([
+      exec("nircmd", ["closeprocess", "chrome"]),
+      exec("nircmd", ["closeprocess", "webstorm64"]),
+    ]);
 
-  // close again because start window could have popped up
-  await exec("nircmd", ["closeprocess", "webstorm64"]);
+    // close again because start window could have popped up
+    await exec("nircmd", ["closeprocess", "webstorm64"]);
 
-  await exec("wsl", ["--shutdown"]);
+    await exec("wsl", ["--shutdown"]);
+  } catch (err) {
+    await logError(err);
+  }
 
   await exec("DisplaySwitch.exe", ["/external"]);
 
