@@ -1,7 +1,6 @@
 import { getAllGames, turnOnGameMode } from "../src/games.js";
-import { open } from "openurl";
-import { promisify } from "node:util";
 import { setTimeout } from "node:timers/promises";
+import { openUrl } from "../src/utils.js";
 
 const gameName = process.argv.at(2);
 
@@ -20,4 +19,4 @@ await turnOnGameMode();
 
 await setTimeout(3000);
 
-await promisify(open)(`steam://rungameid/${game.runGameId}`);
+await openUrl(`steam://rungameid/${game.runGameId}`);
