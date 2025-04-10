@@ -25,8 +25,6 @@ export const STEAM_APPS_ROOT = path.resolve(STEAM_ROOT, "steamapps");
 export const STEAM_USER_DATA_ROOT = path.resolve(STEAM_ROOT, "userdata");
 
 export async function turnOnGameMode(): Promise<void> {
-  await exec("DisplaySwitch.exe", ["/external"]);
-
   await Promise.all([
     exec("nircmd", ["closeprocess", "chrome"]),
     exec("nircmd", ["closeprocess", "webstorm64"]),
@@ -36,6 +34,8 @@ export async function turnOnGameMode(): Promise<void> {
   await exec("nircmd", ["closeprocess", "webstorm64"]);
 
   await exec("wsl", ["--shutdown"]);
+
+  await exec("DisplaySwitch.exe", ["/external"]);
 
   await openUrl("steam://open/gamepadui");
 }
