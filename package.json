@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "startGame": "tsx scripts/startGame.ts",
+    "switchToMonitor": "tsx scripts/switchToMonitor.ts",
     "turnOnGameMode": "tsx scripts/turnOnGameMode.ts",
     "turnOnWorkMode": "tsx scripts/turnOnWorkMode.ts"
   },

@@ -1,6 +1,6 @@
-import { exec } from "teen_process";
 import { openUrl } from "../src/utils.js";
+import { switchToMonitor } from "../src/games.js";
 
-await exec("DisplaySwitch.exe", ["/internal"]);
+await switchToMonitor();
 
 await openUrl("steam://close/bigpicture");
