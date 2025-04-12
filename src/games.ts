@@ -33,10 +33,14 @@ export async function turnOnGameMode(): Promise<void> {
   await Promise.all([
     silent(exec("nircmd", ["closeprocess", "chrome"])),
     silent(exec("nircmd", ["closeprocess", "webstorm64"])),
+    silent(exec("nircmd", ["closeprocess", "phpstorm64"])),
   ]);
 
   // close again because start window could have popped up
-  await silent(exec("nircmd", ["closeprocess", "webstorm64"]));
+  await Promise.all([
+    silent(exec("nircmd", ["closeprocess", "webstorm64"])),
+    silent(exec("nircmd", ["closeprocess", "phpstorm64"])),
+  ]);
 
   await silent(exec("wsl", ["--shutdown"]));
 
