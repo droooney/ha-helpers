@@ -47,7 +47,7 @@ export async function switchToTv(): Promise<void> {
 
   await setTvSettings();
 
-  await setTimeout(3000);
+  await setTimeout(5000);
 
   await setTvSettings();
 }
