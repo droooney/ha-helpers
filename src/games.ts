@@ -12,6 +12,7 @@ import {
 import { z } from "zod";
 import sortBy from "lodash/sortBy.js";
 import { exec } from "teen_process";
+import { setTimeout } from "node:timers/promises";
 
 export type Game = {
   name: string;
@@ -29,9 +30,7 @@ export async function switchToMonitor(): Promise<void> {
   await exec("DisplaySwitch.exe", ["/internal"]);
 }
 
-export async function switchToTv(): Promise<void> {
-  await exec("DisplaySwitch.exe", ["/external"]);
-
+export async function setTvSettings(): Promise<void> {
   await exec("nircmd", [
     "nircmd",
     "setdisplay",
@@ -41,6 +40,16 @@ export async function switchToTv(): Promise<void> {
     "24",
     "120",
   ]);
+}
+
+export async function switchToTv(): Promise<void> {
+  await exec("DisplaySwitch.exe", ["/external"]);
+
+  await setTvSettings();
+
+  await setTimeout(3000);
+
+  await setTvSettings();
 }
 
 export async function turnOnGameMode(): Promise<void> {
