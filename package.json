@@ -5,6 +5,7 @@
   "scripts": {
     "startGame": "tsx scripts/startGame.ts",
     "switchToMonitor": "tsx scripts/switchToMonitor.ts",
+    "switchToTv": "tsx scripts/switchToTv.ts",
     "test": "tsx scripts/test.ts",
     "turnOnGameMode": "tsx scripts/turnOnGameMode.ts",
     "turnOnWorkMode": "tsx scripts/turnOnWorkMode.ts"

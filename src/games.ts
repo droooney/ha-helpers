@@ -29,6 +29,20 @@ export async function switchToMonitor(): Promise<void> {
   await exec("DisplaySwitch.exe", ["/internal"]);
 }
 
+export async function switchToTv(): Promise<void> {
+  await exec("DisplaySwitch.exe", ["/external"]);
+
+  await exec("nircmd", [
+    "nircmd",
+    "setdisplay",
+    'monitor:"HAIER TV"',
+    "3840",
+    "2160",
+    "24",
+    "120",
+  ]);
+}
+
 export async function turnOnGameMode(): Promise<void> {
   await Promise.all([
     silent(exec("nircmd", ["closeprocess", "chrome"])),
@@ -44,7 +58,7 @@ export async function turnOnGameMode(): Promise<void> {
 
   await silent(exec("wsl", ["--shutdown"]));
 
-  await exec("DisplaySwitch.exe", ["/external"]);
+  await switchToTv();
 
   await openUrl("steam://open/gamepadui");
 }
