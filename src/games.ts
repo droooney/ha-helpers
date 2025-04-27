@@ -32,9 +32,8 @@ export async function switchToMonitor(): Promise<void> {
 
 export async function setTvSettings(): Promise<void> {
   await exec("nircmd", [
-    "nircmd",
     "setdisplay",
-    'monitor:"HAIER TV"',
+    "monitor:HAIER TV",
     "3840",
     "2160",
     "24",
